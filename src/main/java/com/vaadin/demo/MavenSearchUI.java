@@ -61,11 +61,11 @@ public class MavenSearchUI extends UI {
         newGrid.setContainerDataSource(new LazySearchContainer(searchTerms));
 
         // Configure columns properly.
-        newGrid.getColumn("g").setHeaderCaption("groupId")
+        newGrid.getColumn("g").setHeaderCaption("groupId").setWidth(318.0)
                 .setRenderer(new HtmlRenderer(), new GroupIdHtmlConverter());
-        newGrid.getColumn("a").setHeaderCaption("artifactId");
+        newGrid.getColumn("a").setWidth(288).setHeaderCaption("artifactId");
         newGrid.getColumn("latestVersion").setHeaderCaption("version")
-                .setWidth(200.0);
+                .setWidth(180.0);
         newGrid.getColumn("timestamp").setHeaderCaption("updated")
                 .setWidth(180.0)
                 .setRenderer(new HtmlRenderer(), new UpdatedHtmlConverter());
