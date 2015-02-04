@@ -130,6 +130,7 @@
     </dependencies>
 
     <build>
+        <finalName>vaadin-maven-search-portlet</finalName>
         <plugins>
             <plugin>
                 <groupId>com.liferay.maven.plugins</groupId>
