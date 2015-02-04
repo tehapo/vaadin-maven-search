@@ -40,15 +40,28 @@ $v-app-background-color: #fff;
 
         span.badge {
             position: absolute;
-            top: 8px;
-            right: -6px;
+            top: 9px;
+            right: 0;
             color: #fff;
             background: #e61e6e;
-            width: 36px;
+            width: 26px;
             font-size: 12px;
-            text-align: center;
+            text-align: left;
             height: 1.2em;
             line-height: 1.1em;
+            border-radius: 0;
+
+            &:before {
+                content: "";
+                border: 9px solid #e61e6e;
+                border-left-color: transparent;
+                position: absolute;
+                display: block;
+                width: 0;
+                height: 0;
+                top: 0;
+                left: -10px;
+            }
         }
 
         .favicon {
