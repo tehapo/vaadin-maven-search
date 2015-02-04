@@ -4,6 +4,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.event.FieldEvents.TextChangeEvent;
 import com.vaadin.event.FieldEvents.TextChangeListener;
+import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
@@ -21,6 +22,8 @@ public class MavenSearchUI extends UI {
     private TextField search;
     private VerticalLayout layout;
 
+    private static final String URI_FRAGMENT_PREFIX = "search:";
+
     @Override
     protected void init(VaadinRequest request) {
         layout = new VerticalLayout();
@@ -35,7 +38,7 @@ public class MavenSearchUI extends UI {
 
             @Override
             public void textChange(TextChangeEvent event) {
-                doSearch(event);
+                doSearch(event.getText());
             }
 
         });
@@ -44,13 +47,33 @@ public class MavenSearchUI extends UI {
         grid.setVisible(false);
         layout.addComponents(search, grid);
         layout.setExpandRatio(grid, 1.0f);
+
+        String uriFragment = Page.getCurrent().getUriFragment();
+        if (uriFragment != null && uriFragment.startsWith(URI_FRAGMENT_PREFIX)) {
+            doSearch(uriFragment.substring(URI_FRAGMENT_PREFIX.length()));
+        } else {
+            doSearch("vaadin");
+        }
     }
 
-    private void doSearch(TextChangeEvent event) {
-        String searchTerms = event.getText();
+    private void updateUriFragment(String searchTerms) {
+        if (searchTerms == null || searchTerms.length() == 0) {
+            Page.getCurrent().setUriFragment("", false);
+        } else {
+            String uriFragment = Page.getCurrent().getUriFragment();
+            if (!(URI_FRAGMENT_PREFIX + searchTerms).equals(uriFragment)) {
+                Page.getCurrent().setUriFragment(
+                        URI_FRAGMENT_PREFIX + searchTerms, false);
+            }
+        }
+    }
+
+    private void doSearch(String searchTerms) {
         if (searchTerms.length() < 3) {
             return;
         }
+        updateUriFragment(searchTerms);
+        search.setValue(searchTerms);
 
         // Create a new Grid to workaround an NPE caused by updating container
         // data source.
