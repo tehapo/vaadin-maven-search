@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<liferay-portlet-app>
+    <portlet>
+        <!-- Matches definition in portlet.xml. -->
+        <portlet-name>Vaadin Maven Search Portlet</portlet-name>
+        <instanceable>false</instanceable>
+        <requires-namespaced-parameters>false</requires-namespaced-parameters>
+        <ajaxable>false</ajaxable>
+    </portlet>
+</liferay-portlet-app>

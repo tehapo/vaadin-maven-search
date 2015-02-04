@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
+
+    <portlet>
+        <portlet-name>Vaadin Maven Search Portlet</portlet-name>
+        <display-name>Vaadin Maven Search Portlet</display-name>
+        
+        <portlet-class>com.vaadin.server.VaadinPortlet</portlet-class>
+        <init-param>
+        	<name>UI</name>
+        	<value>com.vaadin.demo.MavenSearchUI</value>
+        </init-param>
+        <init-param>
+        	<name>productionMode</name>
+        	<value>true</value>
+        </init-param>
+		<init-param>
+			<name>vaadin.resources.path</name>
+			<value>PORTLET_CONTEXT</value>
+		</init-param>
+        
+        <!-- Supported portlet modes and content types. -->
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+            <!-- <portlet-mode>edit</portlet-mode> -->
+            <!-- <portlet-mode>help</portlet-mode> -->
+        </supports>
+        
+        <!-- Not always required but Liferay uses these. -->
+        <portlet-info>
+            <title>Vaadin Maven Search Portlet</title>
+            <short-title>Vaadin Maven Search Portlet</short-title>
+        </portlet-info>
+    </portlet>
+        
+</portlet-app>
