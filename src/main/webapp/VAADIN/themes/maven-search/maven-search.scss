@@ -96,8 +96,10 @@ $v-focus-color: #00b4f0; // Calculates a suitable color automatically
             background: #fff;
             border: 1px solid rgba(0, 0, 0, 0.2);
             color: $v-link-font-color;
-            font-size: 14px;
             line-height: 1em;
+            width: 1.5em;
+            font-weight: bold;
+            font-size: 15px;
         }
 
         a {

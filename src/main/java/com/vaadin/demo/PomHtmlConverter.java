@@ -17,7 +17,7 @@ public class PomHtmlConverter implements Converter<String, String> {
     public String convertToPresentation(String value,
             Class<? extends String> targetType, Locale locale)
             throws com.vaadin.data.util.converter.Converter.ConversionException {
-        return "POM";
+        return "+";
     }
 
     @Override
