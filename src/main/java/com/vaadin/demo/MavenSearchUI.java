@@ -6,6 +6,8 @@ import com.vaadin.event.FieldEvents.TextChangeEvent;
 import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
+import com.vaadin.server.Page.UriFragmentChangedEvent;
+import com.vaadin.server.Page.UriFragmentChangedListener;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Grid;
@@ -23,7 +25,7 @@ import com.vaadin.ui.renderer.HtmlRenderer;
 @Theme("maven-search")
 @Widgetset("com.vaadin.DefaultWidgetSet")
 @SuppressWarnings("serial")
-public class MavenSearchUI extends UI {
+public class MavenSearchUI extends UI implements UriFragmentChangedListener {
 
     private Grid grid;
     private TextField search;
@@ -57,11 +59,21 @@ public class MavenSearchUI extends UI {
         layout.addComponents(search, grid);
         layout.setExpandRatio(grid, 1.0f);
 
+        // Try initial URI fragment and hook a listener.
         String uriFragment = Page.getCurrent().getUriFragment();
         if (uriFragment != null && uriFragment.startsWith(URI_FRAGMENT_PREFIX)) {
             doSearch(uriFragment.substring(URI_FRAGMENT_PREFIX.length()));
         } else {
             doSearch("vaadin");
+        }
+        Page.getCurrent().addUriFragmentChangedListener(this);
+    }
+
+    @Override
+    public void uriFragmentChanged(UriFragmentChangedEvent event) {
+        if (event.getUriFragment().startsWith(URI_FRAGMENT_PREFIX)) {
+            doSearch(event.getUriFragment().substring(
+                    URI_FRAGMENT_PREFIX.length()));
         }
     }
 
