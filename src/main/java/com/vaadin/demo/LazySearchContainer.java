@@ -10,6 +10,7 @@ import org.vaadin.addons.lazyquerycontainer.LazyQueryContainer;
 import org.vaadin.addons.lazyquerycontainer.LazyQueryDefinition;
 import org.vaadin.addons.lazyquerycontainer.QueryDefinition;
 
+import com.vaadin.demo.data.CachingMavenSearchService;
 import com.vaadin.demo.data.MavenArtifact;
 import com.vaadin.demo.data.MavenSearchService;
 
@@ -41,7 +42,7 @@ public class LazySearchContainer extends LazyQueryContainer {
     public static class MavenSearchBeanQuery extends
             AbstractBeanQuery<MavenArtifact> {
 
-        private final MavenSearchService service = new MavenSearchService();
+        private final MavenSearchService service = new CachingMavenSearchService();
 
         public MavenSearchBeanQuery(QueryDefinition definition,
                 Map<String, Object> queryConfiguration,
