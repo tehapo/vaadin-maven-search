@@ -62,9 +62,9 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
         // Try initial URI fragment and hook a listener.
         String uriFragment = Page.getCurrent().getUriFragment();
         if (uriFragment != null && uriFragment.startsWith(URI_FRAGMENT_PREFIX)) {
-            doSearch(uriFragment.substring(URI_FRAGMENT_PREFIX.length()));
+            doSearch(uriFragment.substring(URI_FRAGMENT_PREFIX.length()), false);
         } else {
-            doSearch("vaadin");
+            doSearch("vaadin", false);
         }
         Page.getCurrent().addUriFragmentChangedListener(this);
     }
@@ -91,10 +91,16 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
     }
 
     private void doSearch(String searchTerms) {
+        doSearch(searchTerms, true);
+    }
+
+    private void doSearch(String searchTerms, boolean updateUriFragment) {
         if (searchTerms == null || searchTerms.length() == 0) {
             return;
         }
-        updateUriFragment(searchTerms);
+        if (updateUriFragment) {
+            updateUriFragment(searchTerms);
+        }
         search.setValue(searchTerms);
 
         // Create a new Grid to workaround an NPE caused by updating container
