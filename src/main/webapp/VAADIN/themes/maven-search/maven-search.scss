@@ -43,7 +43,7 @@ $v-focus-color: #00b4f0; // Calculates a suitable color automatically
             top: 7px;
             right: 7px;
             font-size: 18px;
-            color: $v-focus-color;
+            color: darken($bgcolor, 20%);
             background: $bgcolor;
             padding: 3px 8px;
             border-radius: 4px;
@@ -103,7 +103,7 @@ $v-focus-color: #00b4f0; // Calculates a suitable color automatically
         a {
             text-decoration: none;
         }
-        
+
         span.badge {
             position: absolute;
             top: 9px;
