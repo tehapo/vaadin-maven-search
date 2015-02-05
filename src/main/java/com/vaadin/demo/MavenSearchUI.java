@@ -90,7 +90,7 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
     }
 
     private void doSearch(String searchTerms) {
-        if (searchTerms.length() < 3) {
+        if (searchTerms == null || searchTerms.length() == 0) {
             return;
         }
         updateUriFragment(searchTerms);
