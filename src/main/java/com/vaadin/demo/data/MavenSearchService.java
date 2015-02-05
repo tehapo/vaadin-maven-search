@@ -7,18 +7,18 @@ import javax.ws.rs.core.MediaType;
 
 public class MavenSearchService {
 
-	private final Client client = ClientBuilder.newClient();
-	private final WebTarget target = client
-			.target("http://search.maven.org/solrsearch/select");
+    private final Client client = ClientBuilder.newClient();
+    private final WebTarget target = client
+            .target("http://search.maven.org/solrsearch/select");
 
-	public MavenSearchResponse search(String searchTerms) {
-		return search(searchTerms, 0, 20);
-	}
+    public MavenSearchResponse search(String searchTerms) {
+        return search(searchTerms, 0, 20);
+    }
 
-	public MavenSearchResponse search(String searchTerms, int start, int rows) {
-		return target.queryParam("q", searchTerms).queryParam("start", start)
-				.queryParam("rows", rows).request(MediaType.APPLICATION_JSON)
-				.get(MavenSearchResponse.class);
-	}
+    public MavenSearchResponse search(String searchTerms, int start, int rows) {
+        return target.queryParam("q", searchTerms).queryParam("start", start)
+                .queryParam("rows", rows).request(MediaType.APPLICATION_JSON)
+                .get(MavenSearchResponse.class);
+    }
 
 }
