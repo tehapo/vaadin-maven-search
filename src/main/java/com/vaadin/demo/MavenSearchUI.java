@@ -7,11 +7,17 @@ import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
+import com.vaadin.ui.renderer.ButtonRenderer;
+import com.vaadin.ui.renderer.ClickableRenderer.RendererClickEvent;
+import com.vaadin.ui.renderer.ClickableRenderer.RendererClickListener;
 import com.vaadin.ui.renderer.HtmlRenderer;
 
 @Theme("maven-search")
@@ -80,23 +86,41 @@ public class MavenSearchUI extends UI {
 
         // Create a new Grid to workaround an NPE caused by updating container
         // data source.
-        Grid newGrid = new Grid();
+        final Grid newGrid = new Grid();
         newGrid.addStyleName("search-results");
         newGrid.setSizeFull();
         newGrid.setSelectionMode(SelectionMode.NONE);
         newGrid.setContainerDataSource(new LazySearchContainer(searchTerms));
 
         // Configure columns properly.
-        newGrid.getColumn("g").setHeaderCaption("groupId").setWidth(318.0)
+        newGrid.getColumn("g").setHeaderCaption("groupId").setWidth(263.0)
                 .setRenderer(new HtmlRenderer(), new GroupIdHtmlConverter());
-        newGrid.getColumn("a").setWidth(288).setHeaderCaption("artifactId");
+        newGrid.getColumn("a").setWidth(238).setHeaderCaption("artifactId");
         newGrid.getColumn("latestVersion").setHeaderCaption("version")
-                .setWidth(100.0);
+                .setWidth(110.0);
         newGrid.getColumn("timestamp").setHeaderCaption("updated")
-                .setWidth(170.0)
+                .setWidth(160.0)
                 .setRenderer(new HtmlRenderer(), new UpdatedHtmlConverter());
         newGrid.getColumn("javaDocUrl").setHeaderCaption("").setWidth(90.0)
                 .setRenderer(new HtmlRenderer(), new JavaDocHtmlConverter());
+        newGrid.getColumn("pomSnippet").setHeaderCaption("").setWidth(105.0)
+                .setRenderer(new ButtonRenderer(new RendererClickListener() {
+
+                    @Override
+                    public void click(RendererClickEvent event) {
+                        String pom = (String) newGrid.getContainerDataSource()
+                                .getItem(event.getItemId())
+                                .getItemProperty("pomSnippet").getValue();
+
+                        Window pomWindow = new Window("pom.xml");
+                        pomWindow.setContent(new Label(pom,
+                                ContentMode.PREFORMATTED));
+                        getUI().addWindow(pomWindow);
+                        pomWindow.center();
+                        pomWindow.focus();
+                    }
+
+                }), new PomHtmlConverter());
 
         layout.replaceComponent(grid, newGrid);
         grid = newGrid;

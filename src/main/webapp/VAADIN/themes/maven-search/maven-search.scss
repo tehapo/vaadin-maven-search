@@ -54,6 +54,17 @@
         }
     }
 
+    .pom-snippet {
+        position: absolute;
+        z-index: 100;
+        top: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 10px 40px;
+        border-radius: 4px;
+    }
+
     .search-results {
 
         .v-grid-row {
@@ -62,6 +73,12 @@
 
         .v-grid-cell {
             position: relative;
+        }
+
+        .v-nativebutton {
+            background: transparent;
+            border: none;
+            color: $v-link-font-color;
         }
 
         span.badge {

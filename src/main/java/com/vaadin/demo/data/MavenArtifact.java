@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class MavenArtifact {
 
+    private static final String JAVADOC_TEMPLATE = "http://demo.vaadin.com/javadoc/%s/%s/%s/";
+    private static final String POM_TEMPLATE = "<dependency>\n    <groupId>%s</groupId>\n    <artifactId>%s</artifactId>\n    <version>%s</version>\n</dependency>";
+
     private String id;
     private String g;
     private String a;
@@ -100,11 +103,15 @@ public class MavenArtifact {
     @JsonIgnore
     public String getJavaDocUrl() {
         if (Arrays.asList(text).contains("-javadoc.jar")) {
-            return "http://demo.vaadin.com/javadoc/" + g + "/" + a + "/"
-                    + latestVersion + "/";
+            return String.format(JAVADOC_TEMPLATE, g, a, latestVersion);
         } else {
             return null;
         }
+    }
+
+    @JsonIgnore
+    public String getPomSnippet() {
+        return String.format(POM_TEMPLATE, g, a, latestVersion);
     }
 
 }
