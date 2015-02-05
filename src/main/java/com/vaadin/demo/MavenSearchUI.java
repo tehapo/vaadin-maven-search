@@ -71,7 +71,8 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
 
     @Override
     public void uriFragmentChanged(UriFragmentChangedEvent event) {
-        if (event.getUriFragment().startsWith(URI_FRAGMENT_PREFIX)) {
+        if (event.getUriFragment() != null
+                && event.getUriFragment().startsWith(URI_FRAGMENT_PREFIX)) {
             doSearch(event.getUriFragment().substring(
                     URI_FRAGMENT_PREFIX.length()));
         }
