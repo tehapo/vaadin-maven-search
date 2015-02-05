@@ -24,7 +24,7 @@ public class LazySearchContainer extends LazyQueryContainer {
         addContainerProperty("a", String.class, "");
         addContainerProperty("latestVersion", String.class, "");
         addContainerProperty("timestamp", Long.class, 0);
-
+        addContainerProperty("javaDocUrl", String.class, "");
     }
 
     private static BeanQueryFactory<MavenSearchBeanQuery> createQueryFactory(

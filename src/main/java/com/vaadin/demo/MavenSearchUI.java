@@ -88,10 +88,12 @@ public class MavenSearchUI extends UI {
                 .setRenderer(new HtmlRenderer(), new GroupIdHtmlConverter());
         newGrid.getColumn("a").setWidth(288).setHeaderCaption("artifactId");
         newGrid.getColumn("latestVersion").setHeaderCaption("version")
-                .setWidth(180.0);
+                .setWidth(100.0);
         newGrid.getColumn("timestamp").setHeaderCaption("updated")
-                .setWidth(180.0)
+                .setWidth(170.0)
                 .setRenderer(new HtmlRenderer(), new UpdatedHtmlConverter());
+        newGrid.getColumn("javaDocUrl").setHeaderCaption("").setWidth(90.0)
+                .setRenderer(new HtmlRenderer(), new JavaDocHtmlConverter());
 
         layout.replaceComponent(grid, newGrid);
         grid = newGrid;

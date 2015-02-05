@@ -1,5 +1,8 @@
 package com.vaadin.demo.data;
 
+import java.util.Arrays;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class MavenArtifact {
 
@@ -92,6 +95,16 @@ public class MavenArtifact {
 
     public void setEc(String[] ec) {
         this.ec = ec;
+    }
+
+    @JsonIgnore
+    public String getJavaDocUrl() {
+        if (Arrays.asList(text).contains("-javadoc.jar")) {
+            return "http://demo.vaadin.com/javadoc/" + g + "/" + a + "/"
+                    + latestVersion + "/";
+        } else {
+            return null;
+        }
     }
 
 }
