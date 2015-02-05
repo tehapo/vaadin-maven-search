@@ -4,6 +4,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.event.FieldEvents.TextChangeEvent;
 import com.vaadin.event.FieldEvents.TextChangeListener;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Grid;
@@ -32,6 +33,8 @@ public class MavenSearchUI extends UI {
         setContent(layout);
 
         search = new TextField();
+        search.addStyleName("search");
+        search.setIcon(FontAwesome.SEARCH);
         search.setInputPrompt("Search for Maven packages...");
         search.setWidth("100%");
         search.addTextChangeListener(new TextChangeListener() {

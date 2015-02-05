@@ -12,8 +12,7 @@
 // Affects the color of some component elements, e.g Button, Panel title, etc
 //$v-background-color: hsl(210, 0%, 98%);
 // Affects the color of content areas, e.g  Panel and Window content, TextField input etc
-$v-app-background-color: #fff;
-
+//$v-app-background-color: #fff;
 // Affects the visual appearance of all components
 //$v-gradient: v-linear 8%;
 //$v-bevel-depth: 30%;
@@ -31,6 +30,29 @@ $v-app-background-color: #fff;
 
 @mixin maven-search {
     @include valo;
+
+    .v-slot-search {
+        .v-caption {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 18px;
+            color: #aaa;
+        }
+        .v-textfield,
+        .v-textfield:focus {
+            font-family: inherit;
+            font-size: 20px;
+            font-weight: 100;
+            border: none;
+            border-radius: 0;
+            border-bottom: 2px solid #eee;
+            padding-left: 40px;
+        }
+        .v-textfield:focus {
+            border-color: #aaa;
+        }
+    }
 
     .search-results {
 
