@@ -9,3 +9,24 @@
   // Include mytheme theme styles in your theme
   @include maven-search;
 }
+
+.pom-window {
+    .v-label {
+        width: 100%;
+        padding: 20px;
+        background: #2f2f2f;
+        color: #eee;
+    }
+    .v-window-header,
+    .v-window-closebox,
+    .v-window-outerheader {
+        background: #555;
+        color: #eee;
+    }
+    .v-window-maximizebox {
+        display: none;
+    }
+    pre {
+        font-family: Consolas, Monaco, monospace;
+    }
+}

@@ -112,7 +112,8 @@ public class MavenSearchUI extends UI {
                                 .getItem(event.getItemId())
                                 .getItemProperty("pomSnippet").getValue();
 
-                        Window pomWindow = new Window("pom.xml");
+                        Window pomWindow = new Window("Copy to your pom.xml");
+                        pomWindow.addStyleName("pom-window");
                         pomWindow.setContent(new Label(pom,
                                 ContentMode.PREFORMATTED));
                         getUI().addWindow(pomWindow);
