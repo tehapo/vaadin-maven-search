@@ -4,6 +4,10 @@
 //$v-font-size: 16px;
 //$v-font-weight: 300;
 //$v-font-family: "Open Sans", sans-serif;
+$v-font-size: 14px;
+$v-font-weight: 400;
+$v-font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
 
 // Defines the border used by all components.
 //$v-border: 1px solid (v-shade 0.7);
@@ -12,14 +16,14 @@
 // Affects the color of some component elements, e.g Button, Panel title, etc
 //$v-background-color: hsl(210, 0%, 98%);
 // Affects the color of content areas, e.g  Panel and Window content, TextField input etc
-//$v-app-background-color: #fff;
+$v-app-background-color: #fff;
 // Affects the visual appearance of all components
 //$v-gradient: v-linear 8%;
 //$v-bevel-depth: 30%;
 //$v-shadow-opacity: 5%;
 
 // Defines colors for indicating status (focus, success, failure)
-//$v-focus-color: valo-focus-color(); // Calculates a suitable color automatically
+$v-focus-color: #00b4f0; // Calculates a suitable color automatically
 //$v-friendly-color: #2c9720;
 //$v-error-indicator-color: #ed473b;
 
@@ -31,23 +35,25 @@
 @mixin maven-search {
     @include valo;
 
+    $bgcolor: #efeee9;
+
     .v-slot-search {
         .v-caption {
             position: absolute;
-            top: 5px;
-            left: 5px;
+            top: 7px;
+            right: 7px;
             font-size: 18px;
-            color: #aaa;
+            color: $v-focus-color;
+            background: $bgcolor;
+            padding: 3px 8px;
+            border-radius: 4px;
         }
         .v-textfield,
         .v-textfield:focus {
-            font-family: inherit;
             font-size: 20px;
-            font-weight: 100;
-            border: none;
-            border-radius: 0;
-            border-bottom: 2px solid #eee;
-            padding-left: 40px;
+            border: 2px solid #e2e2e2;
+            padding: 10px 20px;
+            color: #8c8b7e;
         }
         .v-textfield:focus {
             border-color: #aaa;
@@ -66,7 +72,11 @@
     }
 
     .search-results {
-
+        .v-grid-tablewrapper,
+        .v-grid-cell,
+        .v-grid-scroller {
+            border: none !important;
+        }
         .v-grid-row {
             overflow: hidden;
         }
@@ -74,37 +84,33 @@
         .v-grid-cell {
             position: relative;
         }
+        .v-grid-row-stripe > td {
+            background: $bgcolor;
+        }
+        .v-grid-header .v-grid-cell {
+            @include linear-gradient(to bottom, $bgcolor 2%, darken($bgcolor, 5%) 98%);
+        }
 
         .v-nativebutton {
-            background: transparent;
-            border: none;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.2);
             color: $v-link-font-color;
+            font-size: 14px;
+            line-height: 1em;
         }
 
         span.badge {
             position: absolute;
             top: 9px;
-            right: 0;
+            right: 10px;
             color: #fff;
             background: #e61e6e;
             width: 26px;
-            font-size: 12px;
+            font-size: 11px;
             text-align: left;
             height: 1.2em;
             line-height: 1.1em;
-            border-radius: 0;
-
-            &:before {
-                content: "";
-                border: 9px solid #e61e6e;
-                border-left-color: transparent;
-                position: absolute;
-                display: block;
-                width: 0;
-                height: 0;
-                top: 0;
-                left: -10px;
-            }
+            border-radius: 2px;
         }
 
         .favicon {

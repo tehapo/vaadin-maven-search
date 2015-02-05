@@ -107,15 +107,15 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
         // Configure columns properly.
         newGrid.getColumn("g").setHeaderCaption("groupId").setWidth(263.0)
                 .setRenderer(new HtmlRenderer(), new GroupIdHtmlConverter());
-        newGrid.getColumn("a").setWidth(238).setHeaderCaption("artifactId");
+        newGrid.getColumn("a").setWidth(263).setHeaderCaption("artifactId");
         newGrid.getColumn("latestVersion").setHeaderCaption("version")
                 .setWidth(110.0);
         newGrid.getColumn("timestamp").setHeaderCaption("updated")
-                .setWidth(160.0)
+                .setWidth(150.0)
                 .setRenderer(new HtmlRenderer(), new UpdatedHtmlConverter());
         newGrid.getColumn("javaDocUrl").setHeaderCaption("").setWidth(90.0)
                 .setRenderer(new HtmlRenderer(), new JavaDocHtmlConverter());
-        newGrid.getColumn("pomSnippet").setHeaderCaption("").setWidth(105.0)
+        newGrid.getColumn("pomSnippet").setHeaderCaption("").setWidth(90.0)
                 .setRenderer(new ButtonRenderer(new RendererClickListener() {
 
                     @Override
