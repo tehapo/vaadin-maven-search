@@ -88,7 +88,8 @@ $v-focus-color: #00b4f0; // Calculates a suitable color automatically
             background: $bgcolor;
         }
         .v-grid-header .v-grid-cell {
-            @include linear-gradient(to bottom, $bgcolor 2%, darken($bgcolor, 5%) 98%);
+            background: darken($bgcolor, 5%);
+            font-weight: bold;
         }
 
         .v-nativebutton {
@@ -99,6 +100,10 @@ $v-focus-color: #00b4f0; // Calculates a suitable color automatically
             line-height: 1em;
         }
 
+        a {
+            text-decoration: none;
+        }
+        
         span.badge {
             position: absolute;
             top: 9px;
