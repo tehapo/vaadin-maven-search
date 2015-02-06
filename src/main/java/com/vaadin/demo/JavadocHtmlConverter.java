@@ -18,7 +18,7 @@ public class JavadocHtmlConverter implements Converter<String, String> {
             Class<? extends String> targetType, Locale locale)
             throws com.vaadin.data.util.converter.Converter.ConversionException {
         if (value != null) {
-            return "<a href=\"" + value + "\">Javadoc</a>";
+            return "<a href=\"" + value + "\" target=\"_blank\">Javadoc</a>";
         } else {
             return "";
         }
