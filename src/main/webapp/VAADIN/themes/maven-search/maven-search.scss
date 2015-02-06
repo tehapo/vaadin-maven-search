@@ -67,17 +67,6 @@ $v-focus-color: #00b4f0; // Calculates a suitable color automatically
         margin-top: 30px;
     }
 
-    .pom-snippet {
-        position: absolute;
-        z-index: 100;
-        top: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.8);
-        color: #fff;
-        padding: 10px 40px;
-        border-radius: 4px;
-    }
-
     .search-results {
         .v-grid-tablewrapper,
         .v-grid-cell,
