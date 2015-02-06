@@ -112,18 +112,26 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
         newGrid.setContainerDataSource(new LazySearchContainer(searchTerms));
 
         // Configure columns properly.
-        newGrid.getColumn("g").setHeaderCaption("groupId").setWidth(263.0)
-                .setRenderer(new HtmlRenderer(), new GroupIdHtmlConverter());
-        newGrid.getColumn("a").setWidth(263).setHeaderCaption("artifactId");
-        newGrid.getColumn("latestVersion").setHeaderCaption("version")
-                .setWidth(110.0);
-        newGrid.getColumn("timestamp").setHeaderCaption("updated")
-                .setWidth(150.0)
-                .setRenderer(new HtmlRenderer(), new UpdatedHtmlConverter());
-        newGrid.getColumn("javaDocUrl").setHeaderCaption("").setWidth(90.0)
-                .setRenderer(new HtmlRenderer(), new JavadocHtmlConverter());
-        newGrid.getColumn("pomSnippet").setHeaderCaption("").setWidth(90.0)
-                .setRenderer(new ButtonRenderer(new RendererClickListener() {
+        // @formatter:off
+        newGrid.getColumn("g")
+               .setHeaderCaption("groupId").setWidth(263.0)
+               .setRenderer(new HtmlRenderer(), new GroupIdHtmlConverter());
+        newGrid.getColumn("a")
+               .setWidth(263)
+               .setHeaderCaption("artifactId");
+        newGrid.getColumn("latestVersion")
+               .setHeaderCaption("version")
+               .setWidth(110.0);
+        newGrid.getColumn("timestamp")
+               .setHeaderCaption("updated")
+               .setWidth(150.0)
+               .setRenderer(new HtmlRenderer(), new UpdatedHtmlConverter());
+        newGrid.getColumn("javaDocUrl")
+               .setHeaderCaption("").setWidth(90.0)
+               .setRenderer(new HtmlRenderer(), new JavadocHtmlConverter());
+        newGrid.getColumn("pomSnippet")
+               .setHeaderCaption("").setWidth(90.0)
+               .setRenderer(new ButtonRenderer(new RendererClickListener() {
 
                     @Override
                     public void click(RendererClickEvent event) {
@@ -141,6 +149,7 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
                     }
 
                 }), new PomHtmlConverter());
+        // @formatter:on
 
         layout.replaceComponent(grid, newGrid);
         grid = newGrid;
