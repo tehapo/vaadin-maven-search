@@ -16,6 +16,22 @@
         padding: 20px;
         background: #2f2f2f;
         color: #eee;
+        overflow: auto;
+        
+        &::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        &::-webkit-scrollbar-track {
+            box-shadow: none;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: rgba(255, 255, 255,0.6);
+        }
+        &::-webkit-scrollbar-corner {
+            background: transparent;
+        }
     }
     .v-window-header,
     .v-window-closebox,

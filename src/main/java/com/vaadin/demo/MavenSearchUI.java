@@ -31,6 +31,7 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
     private TextField search;
     private VerticalLayout layout;
     private Label noResultsLabel;
+    private DependencyWindow pomWindow;
 
     private static final String URI_FRAGMENT_PREFIX = "search:";
 
@@ -146,13 +147,13 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
                                 .getItem(event.getItemId())
                                 .getItemProperty("pomSnippet").getValue();
 
-                        Window pomWindow = new Window("Copy to your pom.xml");
-                        pomWindow.addStyleName("pom-window");
-                        pomWindow.setContent(new Label(pom,
-                                ContentMode.PREFORMATTED));
-                        getUI().addWindow(pomWindow);
-                        pomWindow.center();
-                        pomWindow.focus();
+                        if (pomWindow == null || !pomWindow.isAttached()) {
+                            pomWindow = new DependencyWindow();
+                            getUI().addWindow(pomWindow);
+                            pomWindow.center();
+                            pomWindow.focus();
+                        }
+                        pomWindow.addDependency(pom);
                     }
 
                 }), new PomHtmlConverter());
@@ -165,5 +166,37 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
         grid.setVisible(grid.getContainerDataSource().size() > 0);
         noResultsLabel.setVisible(!grid.isVisible());
         noResultsLabel.setValue("No search results for " + searchTerms + ".");
+    }
+
+    private static class DependencyWindow extends Window {
+
+        private Label pomLabel = new Label("", ContentMode.PREFORMATTED);
+        private int pomCount;
+
+        public DependencyWindow() {
+            pomLabel.setSizeFull();
+            setContent(pomLabel);
+            addStyleName("pom-window");
+            setWidth("600px");
+            setHeight("200px");
+            addCloseListener(new CloseListener() {
+
+                @Override
+                public void windowClose(CloseEvent e) {
+                    pomLabel.setValue("");
+                    pomCount = 0;
+                }
+            });
+        }
+
+        public void addDependency(String pomSnippet) {
+            pomCount++;
+            setCaption("Copy to your pom.xml (" + pomCount + ")");
+            if (pomCount > 1) {
+                pomSnippet = "\n" + pomSnippet;
+            }
+            pomLabel.setValue(pomLabel.getValue() + pomSnippet);
+        }
+
     }
 }
