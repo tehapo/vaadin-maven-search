@@ -30,6 +30,7 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
     private Grid grid;
     private TextField search;
     private VerticalLayout layout;
+    private Label noResultsLabel;
 
     private static final String URI_FRAGMENT_PREFIX = "search:";
 
@@ -56,8 +57,14 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
 
         grid = new Grid();
         grid.setVisible(false);
-        layout.addComponents(search, grid);
+
+        noResultsLabel = new Label("");
+        noResultsLabel.setVisible(false);
+        noResultsLabel.addStyleName("no-results");
+
+        layout.addComponents(search, grid, noResultsLabel);
         layout.setExpandRatio(grid, 1.0f);
+        layout.setExpandRatio(noResultsLabel, 1.0f);
 
         // Try initial URI fragment and hook a listener.
         String uriFragment = Page.getCurrent().getUriFragment();
@@ -153,5 +160,10 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
 
         layout.replaceComponent(grid, newGrid);
         grid = newGrid;
+
+        // Hide Grid if no results found and display a Label instead.
+        grid.setVisible(grid.getContainerDataSource().size() > 0);
+        noResultsLabel.setVisible(!grid.isVisible());
+        noResultsLabel.setValue("No search results for " + searchTerms + ".");
     }
 }
