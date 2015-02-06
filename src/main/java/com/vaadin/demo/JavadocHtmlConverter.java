@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import com.vaadin.data.util.converter.Converter;
 
-public class JavaDocHtmlConverter implements Converter<String, String> {
+public class JavadocHtmlConverter implements Converter<String, String> {
 
     @Override
     public String convertToModel(String value,
@@ -18,7 +18,7 @@ public class JavaDocHtmlConverter implements Converter<String, String> {
             Class<? extends String> targetType, Locale locale)
             throws com.vaadin.data.util.converter.Converter.ConversionException {
         if (value != null) {
-            return "<a href=\"" + value + "\">JavaDoc</a>";
+            return "<a href=\"" + value + "\">Javadoc</a>";
         } else {
             return "";
         }
