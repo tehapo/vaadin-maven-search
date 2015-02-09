@@ -5,7 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties({ "status", "spellcheck", "alternate" })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MavenSearchResponse {
 
     private ResponseHeader responseHeader;
