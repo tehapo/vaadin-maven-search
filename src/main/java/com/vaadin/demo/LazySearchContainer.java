@@ -21,8 +21,8 @@ public class LazySearchContainer extends LazyQueryContainer {
     public LazySearchContainer(String searchTerms) {
         super(new LazyQueryDefinition(false, PAGE_LENGTH, "id"),
                 createQueryFactory(searchTerms));
-        addContainerProperty("g", String.class, "");
-        addContainerProperty("a", String.class, "");
+        addContainerProperty("groupId", String.class, "");
+        addContainerProperty("artifactId", String.class, "");
         addContainerProperty("latestVersion", String.class, "");
         addContainerProperty("timestamp", Long.class, 0);
         addContainerProperty("javaDocUrl", String.class, "");

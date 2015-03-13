@@ -3,6 +3,7 @@ package com.vaadin.demo.data;
 import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MavenArtifact {
 
@@ -10,8 +11,13 @@ public class MavenArtifact {
     private static final String POM_TEMPLATE = "<dependency>\n    <groupId>%s</groupId>\n    <artifactId>%s</artifactId>\n    <version>%s</version>\n</dependency>";
 
     private String id;
-    private String g;
-    private String a;
+
+    @JsonProperty("g")
+    private String groupId;
+
+    @JsonProperty("a")
+    private String artifactId;
+
     private String latestVersion;
     private String repositoryId;
     private String p;
@@ -28,20 +34,20 @@ public class MavenArtifact {
         this.id = id;
     }
 
-    public String getG() {
-        return g;
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setG(String g) {
-        this.g = g;
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 
-    public String getA() {
-        return a;
+    public String getArtifactId() {
+        return artifactId;
     }
 
-    public void setA(String a) {
-        this.a = a;
+    public void setArtifactId(String artifactId) {
+        this.artifactId = artifactId;
     }
 
     public String getLatestVersion() {
@@ -103,7 +109,8 @@ public class MavenArtifact {
     @JsonIgnore
     public String getJavaDocUrl() {
         if (Arrays.asList(text).contains("-javadoc.jar")) {
-            return String.format(JAVADOC_TEMPLATE, g, a, latestVersion);
+            return String.format(JAVADOC_TEMPLATE, groupId, artifactId,
+                    latestVersion);
         } else {
             return null;
         }
@@ -111,7 +118,7 @@ public class MavenArtifact {
 
     @JsonIgnore
     public String getPomSnippet() {
-        return String.format(POM_TEMPLATE, g, a, latestVersion);
+        return String.format(POM_TEMPLATE, groupId, artifactId, latestVersion);
     }
 
 }
