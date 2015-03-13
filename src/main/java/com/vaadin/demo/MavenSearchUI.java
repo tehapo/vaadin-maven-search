@@ -17,10 +17,10 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import com.vaadin.ui.renderer.ButtonRenderer;
-import com.vaadin.ui.renderer.ClickableRenderer.RendererClickEvent;
-import com.vaadin.ui.renderer.ClickableRenderer.RendererClickListener;
-import com.vaadin.ui.renderer.HtmlRenderer;
+import com.vaadin.ui.renderers.ButtonRenderer;
+import com.vaadin.ui.renderers.ClickableRenderer.RendererClickEvent;
+import com.vaadin.ui.renderers.ClickableRenderer.RendererClickListener;
+import com.vaadin.ui.renderers.HtmlRenderer;
 
 @Theme("maven-search")
 @Widgetset("com.vaadin.DefaultWidgetSet")
