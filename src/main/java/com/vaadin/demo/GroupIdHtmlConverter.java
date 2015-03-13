@@ -3,11 +3,12 @@ package com.vaadin.demo;
 import java.util.Locale;
 
 import com.vaadin.data.util.converter.Converter;
+import com.vaadin.demo.servlet.FaviconServlet;
 
 public class GroupIdHtmlConverter implements Converter<String, String> {
 
-    private final String fallbackIconUrl = "/vaadin-maven-search-portlet/VAADIN/themes/maven-search/jar.png";
-    private final String servletUrl = "/vaadin-maven-search-portlet/favicon";
+    private final String fallbackIconUrl = "/VAADIN/themes/maven-search/jar.png";
+    private final String servletUrl = "/favicon";
 
     @Override
     public String convertToModel(String value,
@@ -20,9 +21,11 @@ public class GroupIdHtmlConverter implements Converter<String, String> {
     public String convertToPresentation(String value,
             Class<? extends String> targetType, Locale locale)
             throws com.vaadin.data.util.converter.Converter.ConversionException {
-        return "<img src=\"" + servletUrl + "?groupId=" + value
+        return "<img src=\"" + FaviconServlet.contextPath + servletUrl
+                + "?groupId=" + value
                 + "\" class=\"favicon\" onerror=\"this.src = '"
-                + fallbackIconUrl + "'\" /> " + value;
+                + FaviconServlet.contextPath + fallbackIconUrl + "'\" /> "
+                + value;
     }
 
     @Override

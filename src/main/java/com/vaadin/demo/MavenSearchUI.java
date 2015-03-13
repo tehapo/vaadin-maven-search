@@ -1,6 +1,9 @@
 package com.vaadin.demo;
 
+import javax.servlet.annotation.WebServlet;
+
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.event.FieldEvents.TextChangeEvent;
 import com.vaadin.event.FieldEvents.TextChangeListener;
@@ -9,6 +12,7 @@ import com.vaadin.server.Page;
 import com.vaadin.server.Page.UriFragmentChangedEvent;
 import com.vaadin.server.Page.UriFragmentChangedListener;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinServlet;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
@@ -34,6 +38,12 @@ public class MavenSearchUI extends UI implements UriFragmentChangedListener {
     private DependencyWindow pomWindow;
 
     private static final String URI_FRAGMENT_PREFIX = "search:";
+
+    @WebServlet("/*")
+    @VaadinServletConfiguration(productionMode = true, ui = MavenSearchUI.class)
+    public static class AppServlet extends VaadinServlet {
+
+    }
 
     @Override
     protected void init(VaadinRequest request) {

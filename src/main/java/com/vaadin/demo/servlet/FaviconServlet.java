@@ -6,7 +6,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,15 +23,23 @@ import com.squareup.okhttp.Request;
  * URLs not supported.
  */
 @SuppressWarnings("serial")
+@WebServlet(value = "/favicon/*", loadOnStartup = 1)
 public class FaviconServlet extends HttpServlet {
 
     private static final List<String> domainBlacklist = new CopyOnWriteArrayList<String>();
     private static Cache<String, byte[]> faviconCache;
     private static OkHttpClient client = new OkHttpClient();
+    public static String contextPath;
 
     static {
         faviconCache = CacheBuilder.newBuilder().maximumSize(100)
                 .expireAfterWrite(30, TimeUnit.MINUTES).build();
+    }
+
+    @Override
+    public void init(ServletConfig cfg) throws ServletException {
+        super.init();
+        contextPath = cfg.getServletContext().getContextPath();
     }
 
     @Override
